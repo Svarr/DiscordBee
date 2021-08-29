@@ -1,4 +1,4 @@
-namespace MusicBeePlugin
+﻿namespace MusicBeePlugin
 {
   using System;
   using System.Collections.Generic;
