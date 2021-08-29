@@ -1,4 +1,4 @@
-﻿namespace MusicBeePlugin
+namespace MusicBeePlugin
 {
   using System;
   using System.Collections.Generic;
@@ -18,6 +18,35 @@
     private LayoutHandler _layoutHandler;
     private Settings _settings;
     private SettingsWindow _settingsWindow;
+    private bool _isConnected = false;
+    private bool IsConnected
+    {
+      get => _isConnected;
+      set
+      {
+        if (value != _isConnected)
+        {
+          _isConnected = value;
+          if (!value && _discordClient?.IsDisposed == false)
+          {
+            // _isConnected set from true to false and _discordClient is not null and not disposed
+            try
+            {
+              Debug.WriteLine("Clearing Presence after connection loss...", "DiscordBee");
+              _discordClient.ClearPresence();
+            }
+            catch (ObjectDisposedException)
+            {
+              // connection was null, just continue
+            }
+            finally
+            {
+              _discordClient.Dispose();
+            }
+          }
+        }
+      }
+    }
 
     public PluginInfo Initialise(IntPtr apiInterfacePtr)
     {
