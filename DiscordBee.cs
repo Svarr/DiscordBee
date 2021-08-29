@@ -106,8 +106,8 @@
     private void ReadyCallback(object sender, ReadyMessage args)
     {
       Debug.WriteLine($"Ready. Connected to Discord Client with User: {args.User.Username}", "DiscordRpc");
-      UpdateDiscordPresence(_mbApiInterface.Player_GetPlayState());
       IsConnected = true;
+      UpdateDiscordPresence(_mbApiInterface.Player_GetPlayState());
     }
 
     private void ErrorCallback(object sender, ErrorMessage e)
@@ -169,6 +169,11 @@
           // _discordClient is either null or disposed
           InitialiseDiscordRpcClient();
         }
+        else
+		{
+          // _discordClient is up and trying to connect
+          return;
+		}
       }
       // perform some action depending on the notification type
       switch (type)
@@ -205,6 +210,11 @@
     private void UpdateDiscordPresence(PlayState playerGetPlayState)
     {
       Debug.WriteLine("DiscordBee: Updating Presence with PlayState {0}...", playerGetPlayState);
+      if (!IsConnected)
+	  {
+        Debug.WriteLine("Client not connected, not sending Presence update.", "DiscordBee");
+        return;
+	  }
       var metaDataDict = GenerateMetaDataDictionary();
 
       // Discord allows only strings with a min length of 2 or the update fails
