@@ -1,4 +1,4 @@
-﻿namespace MusicBeePlugin
+namespace MusicBeePlugin
 {
   using System;
   using System.Collections.Generic;
@@ -170,10 +170,10 @@
           InitialiseDiscordRpcClient();
         }
         else
-		{
+        {
           // _discordClient is up and trying to connect
           return;
-		}
+        }
       }
       // perform some action depending on the notification type
       switch (type)
@@ -211,10 +211,10 @@
     {
       Debug.WriteLine("DiscordBee: Updating Presence with PlayState {0}...", playerGetPlayState);
       if (!IsConnected)
-	  {
+      {
         Debug.WriteLine("Client not connected, not sending Presence update.", "DiscordBee");
         return;
-	  }
+      }
       var metaDataDict = GenerateMetaDataDictionary();
 
       // Discord allows only strings with a min length of 2 or the update fails
