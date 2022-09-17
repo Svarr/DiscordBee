@@ -78,9 +78,6 @@
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscordRPC">
-      <HintPath>.\DiscordRPC.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -172,6 +169,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DiscordRichPresence">
+      <Version>1.0.175</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
@@ -188,7 +188,6 @@
     <EmbeddedResource Include="Resources\Icons\play_white.png" />
     <EmbeddedResource Include="Resources\Icons\stop_white.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>@echo on 
